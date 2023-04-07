@@ -1,0 +1,145 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+class GUI implements ActionListener
+{
+    static JLabel userLabel;
+    static JTextField userText;
+    static JLabel passwordLabel;
+    static JPasswordField passwordText;
+    static JButton loginButton;
+    static JLabel success;
+    static JButton clearButton;
+    static JButton receptionistButton;
+    static JButton patientsButton;
+    static JButton doctorButton;
+    static JButton forgotpasswordButton;
+    static JLabel selectRole;
+
+    public static void main(String[] args)
+    {
+        // write your code here
+        JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+        frame.setSize(900,600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.add(panel);
+        frame.setResizable(true);
+
+        panel.setLayout(null);
+
+        selectRole = new JLabel("Please select a role");
+        selectRole.setBounds(50,60,150, 25);
+        panel.add(selectRole);
+
+        userLabel = new JLabel("User");
+        userLabel.setBounds(250,170,200,25);
+        panel.add(userLabel);
+
+        userText = new JTextField(20);
+        userText.setBounds(250,200,165,25);
+        panel.add(userText);
+
+        passwordLabel = new JLabel("Password");
+        passwordLabel.setBounds(250,240,80,25);
+        panel.add(passwordLabel);
+
+        passwordText = new JPasswordField();
+        passwordText.setBounds(250,270,165,25);
+        panel.add(passwordText);
+
+        forgotpasswordButton = new JButton("Forgot password?");
+        forgotpasswordButton.addActionListener(new GUI());
+        forgotpasswordButton.setBounds(250,320,165,25);
+        panel.add(forgotpasswordButton);
+
+        loginButton = new JButton("Submit");
+        loginButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String user = userText.getText();
+                String password = passwordText.getText();
+                System.out.println(user + ", " + password);
+
+                if(user.equals("Ben") && password.equals("123"))
+                {
+                    success.setText("Login Successful");
+                    userText.setText("");
+                    passwordText.setText("");
+                }
+                else
+                {
+                    success.setText("Login Failed");
+                }
+            }
+        });
+        loginButton.setBounds(750,500,80,25);
+        panel.add(loginButton);
+
+        clearButton = new JButton("Clear");
+        clearButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                userText.setText("");
+                passwordText.setText("");
+            }
+        });
+        clearButton.setBounds(50,500,80,25);
+        panel.add(clearButton);
+
+        receptionistButton = new JButton("Receptionist");
+        receptionistButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+               userLabel.setText("Receptionist ID");
+            }
+        });
+        receptionistButton.setBounds( 50,30,250,25);
+        panel.add(receptionistButton);
+
+        patientsButton = new JButton("Patient");
+        patientsButton.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                userLabel.setText("Patient ID");
+            }
+        });
+        patientsButton.setBounds(330,30,250,25);
+        panel.add(patientsButton);
+
+        doctorButton = new JButton("Doctor");
+        doctorButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                userLabel.setText("Doctor ID");
+            }
+        });
+        doctorButton.setBounds(600,30,250,25);
+        panel.add(doctorButton);
+
+        success = new JLabel("");
+        success.setBounds(250,290,300,25);
+        panel.add(success);
+
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+
+
+    }
+}

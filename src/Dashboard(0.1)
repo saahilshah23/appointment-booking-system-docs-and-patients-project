@@ -1,0 +1,115 @@
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+public class Dashboard 
+{
+	private  Connection connect = null;
+	//private PreparedStatement preparedStatement = null;
+	private  ResultSet resultSet;
+	private  ResultSet doctorInfo;
+	private  DefaultTableModel tableModel = new DefaultTableModel();
+	private String doctorID;
+	private JButton viewPatients;
+	private JButton viewBookings;
+	private JButton assignDoctor;
+	private JButton logout;
+	private JLabel reminder;
+	
+	Dashboard(String doctorName)
+	{
+		this.doctorID = doctorName;
+		init();
+	}
+	
+	private void init()
+	{
+		connectDB();
+		createGUI();
+		
+	}
+	
+	private void createGUI() {
+		try {
+		//create the JFrame
+			JFrame frame = new JFrame("Dashboard");
+			JPanel panel = new JPanel();
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        frame.setSize(900, 600);
+	        frame.add(panel);
+	        frame.setResizable(false);
+	        panel.setLayout(null);
+	        
+	        reminder = new JLabel ("Your next appointment is at 14:00 with Ben Haras-Gummer");
+	        reminder.setBounds(275, 50, 400, 25);
+	        panel.add(reminder);
+	        
+	        viewPatients = new JButton("View your patients");
+	        viewPatients.setBounds(325, 125, 200, 25);
+	        panel.add(viewPatients);
+	        
+	        viewBookings = new JButton("View your bookings");
+	        viewBookings.setBounds(325, 200, 200, 25);
+	        panel.add(viewBookings);
+	        
+	        assignDoctor = new JButton("Assign a new Doctor");
+	        assignDoctor.setBounds(325,275, 200, 25);
+	        panel.add(assignDoctor);
+	        
+	        logout = new JButton("Logout");
+	        logout.setBounds(750, 500, 80, 25);
+	        panel.add(logout);
+	        
+		    frame.setVisible(true);
+		}
+		
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private void connectDB() {
+		try {
+			//Declare the SQL Connector
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			//Establish connection to Database
+			connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/co559?user=Ben&password=H2-H2-13-13");
+			
+			//Create Query for patients list
+			//statement = connection.createStatement();
+			//resultSet = statement.executeQuery("SELECT * FROM patients WHERE doctor = ?");
+			//preparedStatement = connect.prepareStatement("SELECT * FROM patients WHERE doctor = ?");
+			//preparedStatement.setString(1, doctorID);
+			//resultSet = preparedStatement.executeQuery();
+			
+			//create query for doctor's info
+			//preparedStatement = connect.prepareStatement("SELECT * FROM doctors WHERE doctorID = ?");
+			//preparedStatement.setString(1, doctorID);
+			//doctorInfo = preparedStatement.executeQuery();
+			//doctorInfo.next(); //This 
+			
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//Return the doctor ID
+	public String getDoctorID() {
+		return doctorID;
+	}
+	
+//	public PreparedStatement getPreparedStatement() {
+//		return preparedStatement;
+//	}
+}
+
